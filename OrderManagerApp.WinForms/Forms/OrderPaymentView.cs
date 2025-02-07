@@ -16,7 +16,6 @@ namespace OrderManagerApp.WinForms.Forms
             orderDataGrid.DataSource = orders;
         }
 
-
         public void SetMoneyArrivals(IEnumerable<MoneyArrival> arrivals)
         {
             arrivalDataGrid.DataSource = arrivals;

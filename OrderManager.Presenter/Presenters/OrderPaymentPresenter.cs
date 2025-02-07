@@ -9,6 +9,7 @@ namespace OrderManagerApp.Presenter.Presenters
         private readonly IOrderRepository _orderRepository;
         private readonly IMoneyArrivalRepository _moneyArrivalRepository;
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IOrderPaymentView _orderPaymentView;
 
         public OrderPaymentPresenter(
             IOrderRepository orderRepository,
@@ -18,7 +19,6 @@ namespace OrderManagerApp.Presenter.Presenters
             _orderRepository = orderRepository;
             _moneyArrivalRepository = moneyArrivalRepository;
             _paymentRepository = paymentRepository;
-            
         }
 
         public Task CreatePayment(Payment payment)
