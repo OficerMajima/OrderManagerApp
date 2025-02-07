@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button3 = new Button();
+            exitButton = new Button();
             orderDataGrid = new DataGridView();
             arrivalDataGrid = new DataGridView();
             paymentsDataGrid = new DataGridView();
@@ -46,25 +46,26 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(41, 39, 40);
-            panel1.Controls.Add(button3);
+            panel1.Controls.Add(exitButton);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(1469, 93);
             panel1.TabIndex = 0;
             // 
-            // button3
+            // exitButton
             // 
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            button3.ForeColor = SystemColors.AppWorkspace;
-            button3.Location = new Point(1385, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(65, 65);
-            button3.TabIndex = 0;
-            button3.Text = "X";
-            button3.UseVisualStyleBackColor = true;
+            exitButton.FlatAppearance.BorderSize = 0;
+            exitButton.FlatStyle = FlatStyle.Flat;
+            exitButton.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            exitButton.ForeColor = SystemColors.AppWorkspace;
+            exitButton.Location = new Point(1385, 12);
+            exitButton.Name = "exitButton";
+            exitButton.Size = new Size(65, 65);
+            exitButton.TabIndex = 0;
+            exitButton.Text = "X";
+            exitButton.UseVisualStyleBackColor = true;
+            exitButton.Click += exitButton_Click;
             // 
             // orderDataGrid
             // 
@@ -106,7 +107,6 @@
             payButton.TabIndex = 4;
             payButton.Text = "Оплатить";
             payButton.UseVisualStyleBackColor = true;
-            payButton.Click += button2_Click;
             // 
             // label1
             // 
@@ -169,7 +169,7 @@
         private DataGridView orderDataGrid;
         private DataGridView arrivalDataGrid;
         private DataGridView paymentsDataGrid;
-        private Button button3;
+        private Button exitButton;
         private Button payButton;
         private Label label1;
         private Label label2;

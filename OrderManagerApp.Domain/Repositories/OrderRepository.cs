@@ -8,9 +8,15 @@ namespace OrderManagerApp.Domain.Repositories
     {
         private readonly OrderManagerDbContext _context;
 
+        public OrderRepository(OrderManagerDbContext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context)); // Проверка на null
+        }
+
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
-            return await _context.Orders.ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
+            return orders;
         }
     }
 }

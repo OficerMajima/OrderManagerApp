@@ -23,12 +23,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OrderManagerApp.Domain\OrderManagerApp.Domain.csproj" />
-    <ProjectReference Include="..\OrderManagerApp.Presenter\OrderManagerApp.Presenter.csproj" />
+    <ProjectReference Include="..\OrderManager.Presenter\OrderManagerApp.Presenter.csproj" />
   </ItemGroup>
 
 </Project>

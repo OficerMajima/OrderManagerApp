@@ -9,18 +9,16 @@ namespace OrderManagerApp.Presenter.Presenters
         private readonly IOrderRepository _orderRepository;
         private readonly IMoneyArrivalRepository _moneyArrivalRepository;
         private readonly IPaymentRepository _paymentRepository;
-        private readonly OrderPaymentView _view;
 
         public OrderPaymentPresenter(
             IOrderRepository orderRepository,
             IMoneyArrivalRepository moneyArrivalRepository,
-            IPaymentRepository paymentRepository,
-            OrderPaymentView view)
+            IPaymentRepository paymentRepository)
         {
             _orderRepository = orderRepository;
             _moneyArrivalRepository = moneyArrivalRepository;
             _paymentRepository = paymentRepository;
-            _view = view;
+            
         }
 
         public Task CreatePayment(Payment payment)
@@ -28,15 +26,15 @@ namespace OrderManagerApp.Presenter.Presenters
             throw new NotImplementedException();
         }
 
-        public async Task FillData()
+        public async Task<IEnumerable<Order>> FillData()
         {
             var orders = await _orderRepository.GetAllOrdersAsync();
-            var arrivals = await _moneyArrivalRepository.GetAllMoneyArrivalsAsync();
-            var payment = await _paymentRepository.GetAllPaymentsAsync();
+            return orders;
+        }
 
-            _view.SetOrders(orders);
-            _view.SetMoneyArrivals(arrivals);
-            _view.SetPayments(payment);
+        public async Task<IEnumerable<Order>> GetOrdersAsync()
+        {
+            return await _orderRepository.GetAllOrdersAsync();
         }
     }
 }
