@@ -1,26 +1,36 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OrderManagerApp.Domain;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Repositories;
-using OrderManagerApp.WinForms.Forms;
-using OrderManagerApp.WinForms.Interfaces;
 using OrderManagerApp.Presenter.Interfaces;
 using OrderManagerApp.Presenter.Presenters;
+using OrderManagerApp.WinForms.Forms;
 
 namespace OrderManagement.WinForms
 {
     internal static class Program
     {
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             var host = CreateHostBuilder().Build();
 
             ApplicationConfiguration.Initialize();
 
-            Application.Run(host.Services.GetRequiredService<OrderPaymentView>());
+            //Application.Run(host.Services.GetRequiredService<IViewOrderPayment>());
+            try
+            {
+                await host.Services.GetRequiredService<IOrderPaymentPresenter>().Run();
+            }
+            catch (Exception erx)
+            {
+
+            }
+            
         }
 
         static IHostBuilder CreateHostBuilder()
@@ -28,14 +38,12 @@ namespace OrderManagement.WinForms
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((services) =>
                 {
-                    services.AddDbContext<OrderManagerDbContext>();
-                    services.AddTransient<IOrderRepository, OrderRepository>();
-                    services.AddTransient<IMoneyArrivalRepository, MoneyArrivalRepository>();
-                    services.AddTransient<IPaymentRepository, PaymentRepository>();
-
-                    services.AddTransient<IOrderPaymentView, OrderPaymentView>();
-                    services.AddTransient<OrderPaymentView>();
+                    services.AddSingleton<IViewOrderPayment, OrderPaymentView>(); 
+                    services.AddTransient<IViewPayForm, PayForm>();
                     services.AddTransient<IOrderPaymentPresenter, OrderPaymentPresenter>();
+                    services.AddTransient<IOrderRepository, OrderRepository>();
+                    services.AddTransient<IPaymentRepository, PaymentRepository>();
+                    services.AddTransient<IMoneyArrivalRepository, MoneyArrivalRepository>();
                 })
                 .ConfigureAppConfiguration(builder =>
                 {

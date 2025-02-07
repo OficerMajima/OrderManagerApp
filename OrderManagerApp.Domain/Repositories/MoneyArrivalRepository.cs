@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Models;
 
@@ -6,16 +6,20 @@ namespace OrderManagerApp.Domain.Repositories
 {
     public class MoneyArrivalRepository : IMoneyArrivalRepository
     {
-        private readonly OrderManagerDbContext _context;
-
-        public MoneyArrivalRepository(OrderManagerDbContext context)
+        public MoneyArrivalRepository(IConfiguration config)
         {
-            _context = context;
+            this._config = config;
         }
+
+        private OrderManagerDbContext _context;
+        private readonly IConfiguration _config;
 
         public async Task<IEnumerable<MoneyArrival>> GetAllMoneyArrivalsAsync()
         {
-            return await _context.MoneyArrivals.ToListAsync();
+            _context = new OrderManagerDbContext(_config);
+            var moneyArrivals = _context.MoneyArrivals.ToList();
+            _context.Dispose();
+            return moneyArrivals;
         }
     }
 }

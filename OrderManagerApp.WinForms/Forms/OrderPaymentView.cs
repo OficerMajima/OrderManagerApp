@@ -1,22 +1,45 @@
 ﻿using OrderManagerApp.Domain.Models;
 using OrderManagerApp.Presenter.Interfaces;
-using OrderManagerApp.WinForms.Interfaces;
 
 namespace OrderManagerApp.WinForms.Forms
 {
-    public partial class OrderPaymentView : Form, IOrderPaymentView
+    public partial class OrderPaymentView : Form, IViewOrderPayment
     {
-        private readonly IOrderPaymentPresenter _presenter;
-
-        public OrderPaymentView(IOrderPaymentPresenter presenter)
+        public OrderPaymentView(IServiceProvider serviceProvider)
         {
+            this._serviceProvider = serviceProvider;
             InitializeComponent();
-            _presenter = presenter;
-            var orders = _presenter.FillData();
-            orderDataGrid.DataSource = orders;
         }
 
+        private readonly IServiceProvider _serviceProvider;
 
+        public event IViewOrderPayment.ExitWindowHandler onCloseWindow;
+        public delegate void ExitWindowHandler();
+
+        public event IViewOrderPayment.PayFormHandler onPayButtonClickWindow;
+        public delegate Task PayFormHandler();
+
+        public int ChosenOrderId
+        {
+            get
+            {
+                if (orderDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("No order selected");
+                return int.Parse(orderDataGrid.SelectedRows[0].Cells[0].Value.ToString());
+            }
+        }
+
+        public int ChosenArrivalId
+        {
+            get
+            {
+                if (arrivalDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("No arrival selected");
+                return int.Parse(arrivalDataGrid.SelectedRows[0].Cells[0].Value.ToString());
+            }
+        }
+        public new void Show()
+        {
+            Application.Run(this);
+        }
         public void SetMoneyArrivals(IEnumerable<MoneyArrival> arrivals)
         {
             arrivalDataGrid.DataSource = arrivals;
@@ -34,17 +57,17 @@ namespace OrderManagerApp.WinForms.Forms
 
         public void ShowMessage(string message)
         {
-            throw new NotImplementedException();
-        }
-
-        private void payButton_Click(object sender, EventArgs e)
-        {
-
+            MessageBox.Show(message);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void payButton_Click(object sender, EventArgs e)
+        {
+            onPayButtonClickWindow.Invoke();
         }
     }
 }

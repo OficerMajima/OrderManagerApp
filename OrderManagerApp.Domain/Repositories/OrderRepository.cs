@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Models;
 
@@ -6,16 +7,19 @@ namespace OrderManagerApp.Domain.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly OrderManagerDbContext _context;
-
-        public OrderRepository(OrderManagerDbContext context)
+        public OrderRepository(IConfiguration config)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context)); // Проверка на null
+            this._config = config;
         }
+
+        private OrderManagerDbContext _context;
+        private readonly IConfiguration _config;
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
-            var orders = await _context.Orders.ToListAsync();
+            _context = new OrderManagerDbContext(_config);
+            var orders = _context.Orders.ToList();
+            _context.Dispose();
             return orders;
         }
     }

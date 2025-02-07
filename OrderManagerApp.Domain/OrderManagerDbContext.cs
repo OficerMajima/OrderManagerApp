@@ -22,5 +22,14 @@ namespace OrderManagerApp.Domain
             var connectionString = config.GetSection("DefaultConnection").Value;
             optionsBuilder.UseSqlServer(connectionString);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Payment>(entity =>
+            {
+                entity.ToTable("Payments", tb => tb.HasTrigger("trg_UpdateOrderAndMoneyArrival"));
+            });
+        }
     }
 }
