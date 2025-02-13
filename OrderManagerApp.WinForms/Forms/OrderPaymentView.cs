@@ -1,25 +1,20 @@
 ﻿using OrderManagerApp.Domain.Models;
-using OrderManagerApp.Presenter.Interfaces;
+using OrderManagerApp.WinForms.Interfaces;
 
 namespace OrderManagerApp.WinForms.Forms
 {
     public partial class OrderPaymentView : Form, IViewOrderPayment
     {
-        public OrderPaymentView(IServiceProvider serviceProvider)
+        public event IViewOrderPayment.ExitWindowHandler onCloseWindow;
+
+        public event IViewOrderPayment.PayFormHandler onPayButtonClickWindow;
+
+        public OrderPaymentView()
         {
-            this._serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
-        private readonly IServiceProvider _serviceProvider;
-
-        public event IViewOrderPayment.ExitWindowHandler onCloseWindow;
-        public delegate void ExitWindowHandler();
-
-        public event IViewOrderPayment.PayFormHandler onPayButtonClickWindow;
-        public delegate Task PayFormHandler();
-
-        public int ChosenOrderId
+        public int ChosenOrderId 
         {
             get
             {
@@ -43,16 +38,28 @@ namespace OrderManagerApp.WinForms.Forms
         public void SetMoneyArrivals(IEnumerable<MoneyArrival> arrivals)
         {
             arrivalDataGrid.DataSource = arrivals;
+            arrivalDataGrid.Columns["ArrivalId"].HeaderText = "Номер";
+            arrivalDataGrid.Columns["ArrivalDate"].HeaderText = "Дата";
+            arrivalDataGrid.Columns["TotalAmount"].HeaderText = "Сумма";
+            arrivalDataGrid.Columns["RemainingAmount"].HeaderText = "Остаток";
         }
 
         public void SetOrders(IEnumerable<Order> orders)
         {
             orderDataGrid.DataSource = orders;
+            orderDataGrid.Columns["OrderId"].HeaderText = "Номер";
+            orderDataGrid.Columns["OrderDate"].HeaderText = "Дата";
+            orderDataGrid.Columns["TotalAmount"].HeaderText = "Сумма";
+            orderDataGrid.Columns["AmountPaid"].HeaderText = "Оплачено";
         }
 
         public void SetPayments(IEnumerable<Payment> payments)
         {
             paymentsDataGrid.DataSource = payments;
+            paymentsDataGrid.Columns["PaymentId"].HeaderText = "Номер";
+            paymentsDataGrid.Columns["OrderId"].HeaderText = "№аказ";
+            paymentsDataGrid.Columns["ArrivalId"].HeaderText = "Приход";
+            paymentsDataGrid.Columns["PaymentAmount"].HeaderText = "Сумма";
         }
 
         public void ShowMessage(string message)

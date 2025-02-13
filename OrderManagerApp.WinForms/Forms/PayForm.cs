@@ -1,21 +1,20 @@
 ﻿using OrderManagerApp.Domain.Models;
-using OrderManagerApp.Presenter.Interfaces;
+using OrderManagerApp.WinForms.Interfaces;
 
 namespace OrderManagerApp.WinForms.Forms
 {
     public partial class PayForm : Form, IViewPayForm
     {
+        public Payment Payment { get; set; }
+        public int ArrivalId { get; set; }
+        public int OrderId { get; set; }
+
+        public event IViewPayForm.PayFormOkButtonHandler onPayFormOkClick;
+
         public PayForm()
         {
             InitializeComponent();
         }
-
-        public Payment Payment { get; set; }
-        public int ArrivalId { get; set; }
-        public int OrderId { get; set; }
-        public decimal PaymentAmount { get; set; }
-
-        public event IViewPayForm.PayFormOkButtonHandler onPayFormOkClick;
 
         private void payButton_Click(object sender, EventArgs e)
         { 

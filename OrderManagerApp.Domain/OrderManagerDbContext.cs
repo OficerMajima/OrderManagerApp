@@ -13,9 +13,9 @@ namespace OrderManagerApp.Domain
         }
 
         private readonly IConfiguration config;
-        public required DbSet<MoneyArrival> MoneyArrivals { get; set; }
-        public required DbSet<Order> Orders { get; set; }
-        public required DbSet<Payment> Payments { get; set; }
+        public DbSet<MoneyArrival> MoneyArrivals { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Models;
 
@@ -7,13 +8,15 @@ namespace OrderManagerApp.Domain.Repositories
 {
     public class PaymentRepository : IPaymentRepository
     {
-        public PaymentRepository(IConfiguration config)
-        {
-            this._config = config;
-        }
-
         private OrderManagerDbContext _context;
         private readonly IConfiguration _config;
+        private readonly ILogger<PaymentRepository> _logger;
+
+        public PaymentRepository(IConfiguration config, ILogger<PaymentRepository> logger)
+        {
+            this._config = config;
+            this._logger = logger;
+        }
 
         public async Task AddPayment(Payment payment)
         {
@@ -21,6 +24,7 @@ namespace OrderManagerApp.Domain.Repositories
             await _context.Payments.AddAsync(payment);
             await _context.SaveChangesAsync();
             _context.Dispose();
+            _logger.LogInformation("Платёж добавлен в таблицу Payments.");
         }
 
         public async Task<IEnumerable<Payment>> GetAllPaymentsAsync()
@@ -28,6 +32,7 @@ namespace OrderManagerApp.Domain.Repositories
             _context = new OrderManagerDbContext(this._config);
             var payments = _context.Payments.ToList();
             _context.Dispose();
+            _logger.LogInformation("Данные из таблицы Payments получены.");
             return payments;
         }
     }
