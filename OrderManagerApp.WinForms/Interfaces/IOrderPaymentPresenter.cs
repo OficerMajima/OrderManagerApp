@@ -1,6 +1,4 @@
-﻿using OrderManagerApp.Domain.Models;
-
-namespace OrderManagerApp.Presenter.Interfaces
+﻿namespace OrderManagerApp.WinForms.Interfaces
 {
     public interface IOrderPaymentPresenter
     {

@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OrderManager.Presenter\OrderManagerApp.Presenter.csproj" />
+    <ProjectReference Include="..\OrderManagerApp.Domain\OrderManagerApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -51,7 +51,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1285, 70);
+            panel1.Size = new Size(1093, 54);
             panel1.TabIndex = 0;
             // 
             // exitButton
@@ -60,7 +60,7 @@
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 204);
             exitButton.ForeColor = SystemColors.AppWorkspace;
-            exitButton.Location = new Point(1212, 9);
+            exitButton.Location = new Point(1033, 3);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(57, 49);
@@ -71,42 +71,49 @@
             // 
             // orderDataGrid
             // 
+            orderDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             orderDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            orderDataGrid.Location = new Point(417, 95);
+            orderDataGrid.Location = new Point(375, 89);
             orderDataGrid.Margin = new Padding(9, 8, 9, 8);
             orderDataGrid.Name = "orderDataGrid";
             orderDataGrid.RowHeadersWidth = 51;
-            orderDataGrid.Size = new Size(349, 515);
+            orderDataGrid.ScrollBars = ScrollBars.Vertical;
+            orderDataGrid.Size = new Size(340, 520);
             orderDataGrid.TabIndex = 0;
             // 
             // arrivalDataGrid
             // 
+            arrivalDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             arrivalDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            arrivalDataGrid.Location = new Point(17, 95);
+            arrivalDataGrid.Location = new Point(17, 89);
             arrivalDataGrid.Margin = new Padding(9, 8, 9, 8);
             arrivalDataGrid.Name = "arrivalDataGrid";
             arrivalDataGrid.RowHeadersWidth = 51;
-            arrivalDataGrid.Size = new Size(318, 515);
+            arrivalDataGrid.ScrollBars = ScrollBars.Vertical;
+            arrivalDataGrid.Size = new Size(340, 600);
             arrivalDataGrid.TabIndex = 1;
             // 
             // paymentsDataGrid
             // 
+            paymentsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             paymentsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            paymentsDataGrid.Location = new Point(784, 95);
+            paymentsDataGrid.Location = new Point(733, 89);
             paymentsDataGrid.Margin = new Padding(9, 8, 9, 8);
             paymentsDataGrid.Name = "paymentsDataGrid";
             paymentsDataGrid.RowHeadersWidth = 51;
-            paymentsDataGrid.Size = new Size(485, 595);
+            paymentsDataGrid.ScrollBars = ScrollBars.Vertical;
+            paymentsDataGrid.Size = new Size(340, 600);
             paymentsDataGrid.TabIndex = 2;
             // 
             // payButton
             // 
             payButton.FlatAppearance.BorderSize = 0;
             payButton.FlatStyle = FlatStyle.Flat;
-            payButton.Location = new Point(460, 620);
+            payButton.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            payButton.Location = new Point(375, 619);
             payButton.Margin = new Padding(3, 2, 3, 2);
             payButton.Name = "payButton";
-            payButton.Size = new Size(306, 70);
+            payButton.Size = new Size(340, 70);
             payButton.TabIndex = 4;
             payButton.Text = "Оплатить";
             payButton.UseVisualStyleBackColor = true;
@@ -116,7 +123,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(17, 72);
+            label1.Location = new Point(17, 56);
             label1.Name = "label1";
             label1.Size = new Size(149, 25);
             label1.TabIndex = 5;
@@ -126,7 +133,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold);
-            label2.Location = new Point(460, 72);
+            label2.Location = new Point(375, 56);
             label2.Name = "label2";
             label2.Size = new Size(132, 25);
             label2.TabIndex = 6;
@@ -136,7 +143,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold);
-            label3.Location = new Point(784, 72);
+            label3.Location = new Point(733, 56);
             label3.Name = "label3";
             label3.Size = new Size(146, 25);
             label3.TabIndex = 7;
@@ -146,10 +153,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1285, 704);
+            ClientSize = new Size(1093, 704);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(label2);
             Controls.Add(payButton);
             Controls.Add(paymentsDataGrid);
             Controls.Add(arrivalDataGrid);

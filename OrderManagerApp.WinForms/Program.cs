@@ -3,9 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Repositories;
-using OrderManagerApp.Presenter.Interfaces;
-using OrderManagerApp.Presenter.Presenters;
+using OrderManagerApp.WinForms.Interfaces;
+using OrderManagerApp.WinForms.Presenters;
 using OrderManagerApp.WinForms.Forms;
+using OrderManagerApp.Domain;
+using Microsoft.Extensions.Logging;
 
 namespace OrderManagement.WinForms
 {
@@ -21,16 +23,7 @@ namespace OrderManagement.WinForms
 
             ApplicationConfiguration.Initialize();
 
-            //Application.Run(host.Services.GetRequiredService<IViewOrderPayment>());
-            try
-            {
-                await host.Services.GetRequiredService<IOrderPaymentPresenter>().Run();
-            }
-            catch (Exception erx)
-            {
-
-            }
-            
+            await host.Services.GetRequiredService<IOrderPaymentPresenter>().Run();
         }
 
         static IHostBuilder CreateHostBuilder()
@@ -38,12 +31,17 @@ namespace OrderManagement.WinForms
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((services) =>
                 {
-                    services.AddSingleton<IViewOrderPayment, OrderPaymentView>(); 
+                    services.AddSingleton<IViewOrderPayment, OrderPaymentView>();
                     services.AddTransient<IViewPayForm, PayForm>();
                     services.AddTransient<IOrderPaymentPresenter, OrderPaymentPresenter>();
                     services.AddTransient<IOrderRepository, OrderRepository>();
                     services.AddTransient<IPaymentRepository, PaymentRepository>();
                     services.AddTransient<IMoneyArrivalRepository, MoneyArrivalRepository>();
+                    services.AddLogging(config =>
+                    {
+                        config.AddConsole();
+                        config.AddDebug();
+                    });
                 })
                 .ConfigureAppConfiguration(builder =>
                 {
