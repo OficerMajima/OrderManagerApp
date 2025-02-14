@@ -49,7 +49,7 @@ namespace OrderManagerApp.WinForms.Presenters
             catch (Exception ex)
             {
                 _view.ShowMessage(JsonSerializer.Serialize(ex));
-                _logger.LogError("Произошла ошибка во время обновления таблиц", ex, ex.Message);
+                _logger.LogError("Произошла ошибка во время обновления таблиц Ошибка {ex}", ex.Message);
             }
         }
 
@@ -69,12 +69,12 @@ namespace OrderManagerApp.WinForms.Presenters
             }
             catch (ArgumentException ex)
             {
-                _logger.LogError("Произошла ошибка во время создания формы", ex, ex.Message);
+                _logger.LogError("Произошла ошибка во время создания формы Ошибка {ex}", ex.Message);
                 _view.ShowMessage(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError("Произошла ошибка во время создания формы", ex, ex.Message);
+                _logger.LogError("Произошла ошибка во время создания формы Ошибка {ex}", ex.Message);
                 _view.ShowMessage(ex.Message);
             }
         }
@@ -87,7 +87,7 @@ namespace OrderManagerApp.WinForms.Presenters
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError("Произошла ошибка при добавлении платежа.", ex.Message);
+                _logger.LogError("Произошла ошибка при добавлении платежа. Ошибка {ex}", ex.Message);
                 _view.ShowMessage(ex.InnerException!.Message);
                 payForm.Close();
             }

@@ -24,7 +24,7 @@ namespace OrderManagerApp.Domain.Repositories
             await _context.Payments.AddAsync(payment);
             await _context.SaveChangesAsync();
             _context.Dispose();
-            _logger.LogInformation("Платёж добавлен в таблицу Payments.");
+            _logger.LogInformation("Платёж добавлен в таблицу Payments. Платеж {payment}", payment);
         }
 
         public async Task<IEnumerable<Payment>> GetAllPaymentsAsync()

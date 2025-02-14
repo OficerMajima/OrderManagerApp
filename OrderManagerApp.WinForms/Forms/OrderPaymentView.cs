@@ -18,7 +18,7 @@ namespace OrderManagerApp.WinForms.Forms
         {
             get
             {
-                if (orderDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("No order selected");
+                if (orderDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("Не выбран заказ");
                 return int.Parse(orderDataGrid.SelectedRows[0].Cells[0].Value.ToString());
             }
         }
@@ -27,7 +27,7 @@ namespace OrderManagerApp.WinForms.Forms
         {
             get
             {
-                if (arrivalDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("No arrival selected");
+                if (arrivalDataGrid.SelectedRows.Count <= 0) throw new ArgumentException("Не выбран приход");
                 return int.Parse(arrivalDataGrid.SelectedRows[0].Cells[0].Value.ToString());
             }
         }
