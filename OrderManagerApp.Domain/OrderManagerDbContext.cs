@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OrderManagerApp.Domain.Models;
-using System.Configuration;
 
 namespace OrderManagerApp.Domain
 {

@@ -37,16 +37,6 @@ namespace OrderManagerApp.WinForms.Presenters
             };
         }
 
-<<<<<<<< HEAD:OrderManagerApp.WinForms/Presenters/OrderPaymentPresenter.cs
-========
-        private readonly IOrderRepository _orderRepository;
-        private readonly IMoneyArrivalRepository _moneyArrivalRepository;
-        private readonly IPaymentRepository _paymentRepository;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IViewOrderPayment _view;
-        private readonly ILogger<OrderPaymentPresenter> _logger;
->>>>>>>> dcac4235dd59942d98c72157a20418baad5bc719:OrderManager.Presenter/Presenters/OrderPaymentPresenter.cs
-
         public async Task UpdateOrderPayment()
         {
             try
@@ -59,12 +49,7 @@ namespace OrderManagerApp.WinForms.Presenters
             catch (Exception ex)
             {
                 _view.ShowMessage(JsonSerializer.Serialize(ex));
-<<<<<<<< HEAD:OrderManagerApp.WinForms/Presenters/OrderPaymentPresenter.cs
                 _logger.LogError("Произошла ошибка во время обновления таблиц", ex, ex.Message);
-========
-                _logger.LogError(ex.Message, ex);
->>>>>>>> dcac4235dd59942d98c72157a20418baad5bc719:OrderManager.Presenter/Presenters/OrderPaymentPresenter.cs
-                throw;
             }
         }
 
