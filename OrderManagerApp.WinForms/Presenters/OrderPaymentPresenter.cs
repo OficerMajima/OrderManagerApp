@@ -37,19 +37,19 @@ namespace OrderManagerApp.WinForms.Presenters
             };
         }
 
-        public async Task UpdateOrderPayment()
+        public async Task InitOrderPayment()
         {
             try
             {
                 _view.SetOrders(await _orderRepository.GetAllOrdersAsync());
                 _view.SetPayments(await _paymentRepository.GetAllPaymentsAsync());
                 _view.SetMoneyArrivals(await _moneyArrivalRepository.GetAllMoneyArrivalsAsync());
-                _logger.LogInformation("Таблицы обновлены успешно.");
+                _logger.LogInformation("Данные таблиц успешно загружены.");
             }
             catch (Exception ex)
             {
-                _view.ShowMessage(JsonSerializer.Serialize(ex));
-                _logger.LogError("Произошла ошибка во время обновления таблиц Ошибка {ex}", ex.Message);
+                _logger.LogError("Произошла ошибка во время подгрузки данных. Ошибка: {ex}", ex.Message);
+                _view.ShowMessage("Произошла ошибка во время подгрузки данных. Обратитесь к администратору");
             }
         }
 
@@ -67,15 +67,10 @@ namespace OrderManagerApp.WinForms.Presenters
                 _logger.LogInformation("Форма для оплаты создана.");
                 payForm.Show();
             }
-            catch (ArgumentException ex)
-            {
-                _logger.LogError("Произошла ошибка во время создания формы Ошибка {ex}", ex.Message);
-                _view.ShowMessage(ex.Message);
-            }
             catch (Exception ex)
             {
                 _logger.LogError("Произошла ошибка во время создания формы Ошибка {ex}", ex.Message);
-                _view.ShowMessage(ex.Message);
+                _view.ShowMessage("Что-то пошло не так при создании формы оплаты. Обратитесь к администратору.");
             }
         }
         private async Task AddPayment(IViewPayForm payForm)
@@ -91,12 +86,11 @@ namespace OrderManagerApp.WinForms.Presenters
                 _view.ShowMessage(ex.InnerException!.Message);
                 payForm.Close();
             }
-
-            await UpdateOrderPayment();
+            await InitOrderPayment();
         }
         public async Task Run()
         {
-            await UpdateOrderPayment();
+            await InitOrderPayment();
             _view.Show();
         } 
     }

@@ -57,7 +57,7 @@ namespace OrderManagerApp.WinForms.Forms
         {
             paymentsDataGrid.DataSource = payments;
             paymentsDataGrid.Columns["PaymentId"].HeaderText = "Номер";
-            paymentsDataGrid.Columns["OrderId"].HeaderText = "№аказ";
+            paymentsDataGrid.Columns["OrderId"].HeaderText = "Заказ";
             paymentsDataGrid.Columns["ArrivalId"].HeaderText = "Приход";
             paymentsDataGrid.Columns["PaymentAmount"].HeaderText = "Сумма";
         }

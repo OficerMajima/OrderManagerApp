@@ -3,7 +3,7 @@
     public interface IOrderPaymentPresenter
     {
         Task Run();
-        Task UpdateOrderPayment();
+        Task InitOrderPayment();
         Task ShowPaymentForm();
     }
 }

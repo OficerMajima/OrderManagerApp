@@ -1,13 +1,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OrderManagerApp.Domain.Interfaces;
 using OrderManagerApp.Domain.Repositories;
+using OrderManagerApp.WinForms.Forms;
 using OrderManagerApp.WinForms.Interfaces;
 using OrderManagerApp.WinForms.Presenters;
-using OrderManagerApp.WinForms.Forms;
-using OrderManagerApp.Domain;
-using Microsoft.Extensions.Logging;
 
 namespace OrderManagement.WinForms
 {
